@@ -1,0 +1,290 @@
+# ==============================================================================
+# LAGRANGIAN PARTICLE TRACKING PROJECT - .gitignore
+# ==============================================================================
+# This file controls what gets tracked in Git.
+# Rule of thumb: Track source code and configs, ignore data and outputs.
+# ==============================================================================
+
+# ==============================================================================
+# DATA FILES - Never commit large datasets
+# ==============================================================================
+# Raw video data (input videos for particle tracking)
+data/raw_videos/
+*.mp4
+*.avi
+*.mov
+*.mkv
+*.flv
+*.wmv
+*.webm
+
+# Processed datasets (intermediate and final processed data)
+data/processed/
+*.npy
+*.npz
+*.h5
+*.hdf5
+*.pkl
+*.pickle
+
+# Results and output data
+data/results/
+*.csv
+*.tsv
+
+# Flow files from Dataset directory
+Dataset/
+*.flo
+
+# JSON data files (but keep config JSONs)
+data/**/*.json
+
+# Keep folder structure with .gitkeep files
+!data/.gitkeep
+!data/raw_videos/.gitkeep
+!data/processed/.gitkeep
+!data/results/.gitkeep
+
+# ==============================================================================
+# MODEL OUTPUTS - Don't track trained models or logs
+# ==============================================================================
+# Model checkpoints and weights (can be large, regenerate from training)
+checkpoints/
+*.pth
+*.pt
+*.ckpt
+*.safetensors
+
+# Keep the checkpoints folder structure
+!checkpoints/.gitkeep
+
+# TensorBoard and training logs
+runs/
+logs/
+*.log
+*.log.*
+events.out.tfevents.*
+
+# Wandb (Weights & Biases) runs
+wandb/
+
+# ==============================================================================
+# RESULTS AND VISUALIZATIONS - Generated outputs
+# ==============================================================================
+# Generated plots and figures
+results/**/*.png
+results/**/*.jpg
+results/**/*.jpeg
+results/**/*.pdf
+results/**/*.svg
+
+# Generated videos (tracking visualizations)
+results/**/*.mp4
+results/**/*.avi
+results/**/*.gif
+
+# Metrics and evaluation results
+results/**/*.json
+results/**/*.txt
+
+# Demo outputs
+demo_output/
+output/
+outputs/
+
+# Keep sample outputs for documentation (exception to the rule)
+!sample_output/
+!sample_output/**
+
+# Keep results folder structure
+!results/.gitkeep
+
+# ==============================================================================
+# PYTHON - Standard Python ignores
+# ==============================================================================
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*$py.class
+*.pyc
+*.pyo
+*.pyd
+
+# C extensions
+*.so
+
+# Distribution / packaging
+.Python
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+pip-wheel-metadata/
+share/python-wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+MANIFEST
+
+# Virtual environments
+env/
+venv/
+ENV/
+env.bak/
+venv.bak/
+.venv/
+
+# PyInstaller
+*.manifest
+*.spec
+
+# Unit test / coverage reports
+htmlcov/
+.tox/
+.nox/
+.coverage
+.coverage.*
+.cache
+nosetests.xml
+coverage.xml
+*.cover
+*.py,cover
+.hypothesis/
+.pytest_cache/
+
+# ==============================================================================
+# JUPYTER NOTEBOOKS - Notebook-specific files
+# ==============================================================================
+# Jupyter Notebook checkpoints
+.ipynb_checkpoints/
+*/.ipynb_checkpoints/*
+
+# Jupyter metadata (can contain execution counts and outputs)
+# Uncomment if you want to ignore all notebook outputs:
+# *.ipynb
+
+# ==============================================================================
+# IDE AND EDITOR - Configuration files for development tools
+# ==============================================================================
+# VSCode
+.vscode/
+.vscode/*
+!.vscode/settings.json
+!.vscode/tasks.json
+!.vscode/launch.json
+!.vscode/extensions.json
+
+# PyCharm
+.idea/
+*.iml
+*.iws
+
+# Sublime Text
+*.sublime-project
+*.sublime-workspace
+
+# Vim
+*.swp
+*.swo
+*~
+
+# Emacs
+\#*\#
+.\#*
+
+# ==============================================================================
+# OPERATING SYSTEM - OS-generated files
+# ==============================================================================
+# macOS
+.DS_Store
+.AppleDouble
+.LSOverride
+._*
+
+# Windows
+Thumbs.db
+Thumbs.db:encryptable
+ehthumbs.db
+ehthumbs_vista.db
+Desktop.ini
+$RECYCLE_BIN/
+
+# Linux
+*~
+.directory
+.Trash-*
+
+# ==============================================================================
+# PROJECT-SPECIFIC - Custom ignores for this project
+# ==============================================================================
+# Local configuration overrides (personal settings not to be shared)
+configs/config_local.yaml
+configs/config_local.yml
+configs/*_local.yaml
+configs/*_local.yml
+
+# Temporary files
+tmp/
+temp/
+*.tmp
+
+# Scratch/experimental notebooks or scripts
+scratch/
+experiments/
+*_scratch.py
+*_test.py
+test_*.py
+!test_installation.py
+
+# Large media files
+*.tar
+*.zip
+*.gz
+*.rar
+*.7z
+
+# ==============================================================================
+# GIT LFS - Files tracked with Git Large File Storage
+# ==============================================================================
+# If using Git LFS, these would be tracked there instead:
+# *.pth filter=lfs diff=lfs merge=lfs -text
+# *.pt filter=lfs diff=lfs merge=lfs -text
+# *.h5 filter=lfs diff=lfs merge=lfs -text
+
+# ==============================================================================
+# KEEP IN GIT - Explicitly track these important files
+# ==============================================================================
+# Source code files are tracked by default
+# !src/**/*.py
+# !*.py
+
+# Configuration files (keep shared configs, ignore local overrides)
+!configs/config.yaml
+!configs/*.yaml
+configs/*_local.yaml
+
+# Documentation
+!README.md
+!*.md
+!LICENSE
+
+# Dependencies
+!requirements.txt
+!setup.py
+!setup.cfg
+!pyproject.toml
+
+# Git configuration files themselves
+!.gitignore
+!.gitattributes
+
+# Folder structure markers
+!**/.gitkeep

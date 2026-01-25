@@ -1,0 +1,75 @@
+# Neural Flow Field Configuration
+
+# Data settings
+data:
+  flow_dir: "../Dataset/backstep"  # Directory containing .flo files
+  video_dir: "data/raw_videos"  # Directory containing video files (if using videos)
+  output_dir: "data/processed"
+  max_flow_files: 50  # Maximum number of flow files to load (null for all)
+  frame_skip: 1
+  
+  # Particle sampling (when using flow files)
+  num_particles: 2000
+  num_timesteps: 20
+  
+  # Particle detection (when using videos)
+  particle_detection:
+    min_area: 5
+    max_area: 100
+    threshold: 50
+    max_distance: 50.0  # Maximum distance for particle matching between frames
+    min_track_length: 5  # Minimum frames a track must span
+  
+  # Normalization bounds
+  normalization:
+    spatial_bounds: [0, 640, 0, 480]  # [x_min, x_max, y_min, y_max]
+    temporal_bounds: [0, 100]  # [t_min, t_max]
+
+# Model architecture
+model:
+  positional_encoding:
+    num_frequencies: 10  # Number of frequency bands for sinusoidal encoding
+    include_input: true
+  
+  mlp:
+    hidden_dims: [256, 256, 256, 128]  # Hidden layer dimensions
+    activation: "relu"  # Options: relu, tanh, gelu
+    use_layer_norm: true
+    dropout: 0.0  # Dropout probability (0 to disable)
+
+# Training settings
+training:
+  batch_size: 4096  # Number of samples per batch
+  num_epochs: 200
+  learning_rate: 0.0001
+  weight_decay: 0.0001
+  gradient_clip: 1.0  # Gradient clipping max norm (null to disable)
+  
+  # Learning rate scheduler
+  scheduler:
+    type: "cosine"  # Options: cosine, step
+    T_max: 200  # For cosine scheduler
+    step_size: 50  # For step scheduler
+    gamma: 0.5  # For step scheduler
+  
+  # Loss function
+  loss:
+    divergence_weight: 0.01  # Weight for divergence regularization (0 to disable)
+  
+  # Early stopping
+  early_stopping:
+    patience: 20  # Number of epochs to wait before stopping
+    min_delta: 0.0001  # Minimum change to qualify as improvement
+  
+  # Checkpointing
+  checkpoint_frequency: 10  # Save checkpoint every N epochs
+
+# Tracking settings
+tracking:
+  integration_method: "rk4"  # Options: euler, rk4
+  dt: 0.01  # Time step size (in normalized time)
+  num_steps: 100  # Number of integration steps
+
+# Device settings
+device: "cuda"  # Options: cuda, cpu (auto-detected if cuda not available)
+seed: 42  # Random seed for reproducibility
